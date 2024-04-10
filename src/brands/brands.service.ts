@@ -5,13 +5,7 @@ import { CreateBrandDto, UpdateBrandDto } from './dto';
 
 @Injectable()
 export class BrandsService {
-  private _brands: Brand[] = [
-    {
-      id: uuid(),
-      name: 'toyota',
-      createAt: new Date().getTime(),
-    },
-  ];
+  private _brands: Brand[] = [];
 
   create(createBrandDto: CreateBrandDto) {
     const brand: Brand = {
@@ -51,5 +45,9 @@ export class BrandsService {
     this.findOne(id);
     this._brands = this._brands.filter((x) => x.id !== id);
     return { existError: false, message: `Brand with id ${id} deleted.` };
+  }
+
+  fillBrandsWithSeedData(brands: Brand[]) {
+    this._brands = brands;
   }
 }
